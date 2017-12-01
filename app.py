@@ -7,7 +7,7 @@ app = Flask(__name__)
 # use decorators to link the function to a url
 @app.route('/')
 def home():
-    return "Hello, World!"  # return a string
+    return "Hello, World! This is the app develop and design for the education purpose only anyone who are interested can contact mamu on the given phone number ok!!!!!!!!!"  # return a string
 
 # @app.route('/welcome')
 # def welcome():
