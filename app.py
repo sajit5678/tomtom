@@ -34,28 +34,15 @@ def newpage1():
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
-	error = ''
-    try:
-	
-        if request.method == "POST":
-		
-            attempted_username = request.form['username']
-            attempted_password = request.form['password']
-
-            #flash(attempted_username)
-            #flash(attempted_password)
-
-            if attempted_username == "admin" and attempted_password == "password":
-                return redirect(url_for('home'))
-				
-            else:
-                error = "Invalid credentials. Try Again."
-
-        return render_template('login.html', error = error)
-
-    except Exception as e:
-        #flash(e)
-        return render_template('login.html', error = error)
+    error = None
+    if request.method == 'POST':
+        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
+            error = 'Invalid Credentials. Please try again.'
+        else:
+            session['logged_in'] = True
+            flash('You were logged in.')
+            return redirect(url_for('home'))
+    return render_template('login.html', error=error)
    
 @app.route('/logout')
 @login_required
