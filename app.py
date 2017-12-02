@@ -36,7 +36,7 @@ def newpage1():
 def login():
     error = None
     if request.method == 'POST':
-        if request.form['username'] == 'admin' or request.form['password'] == 'admin':
+        if request.form['username']=='admin' and request.form['password']=='admin':
             #error = 'Invalid Credentials. Please try again.'
 			session['logged_in'] = True
             flash('You were logged in.')
