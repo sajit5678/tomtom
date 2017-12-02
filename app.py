@@ -22,8 +22,8 @@ def login_required(f):
 # use decorators to link the function to a url
 @app.route('/')
 def home():
-    return "Hello, World! This is the app develop and design for the \n education purpose only anyone who are interested can contact mamu on the given phone number ok!!!!!!!!!"  # return a string
-
+    return render_template('index.html')  # render a template
+    # return "Hello, World!"  # return a string
 @app.route('/welcome')
 def welcome():
     return render_template('welcome.html')  # render a template
