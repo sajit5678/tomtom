@@ -17,7 +17,7 @@ def welcome():
 def newpage1():
     return render_template('main.html')
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login')
 def login():
     error = None
     if request.method == 'POST':
