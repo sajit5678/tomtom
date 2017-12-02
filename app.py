@@ -21,6 +21,7 @@ def login_required(f):
 	
 # use decorators to link the function to a url
 @app.route('/')
+@login_required
 def home():
     return render_template('index.html')  # render a template
     # return "Hello, World!"  # return a string
@@ -40,7 +41,7 @@ def login():
             error = 'Invalid Credentials. Please try again.'
         else:
             session['logged_in'] = True
-            flash('You were logged in.')
+            flash('You were logged in. This is my new code')
             return redirect(url_for('home'))
     return render_template('login.html', error=error)
    
