@@ -36,12 +36,16 @@ def newpage1():
 def login():
     error = None
     if request.method == 'POST':
-        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
-            error = 'Invalid Credentials. Please try again.'
-        else:
-            session['logged_in'] = True
+        if request.form['username'] == 'admin' or request.form['password'] == 'admin':
+            #error = 'Invalid Credentials. Please try again.'
+			session['logged_in'] = True
             flash('You were logged in.')
             return redirect(url_for('home'))
+        else:
+            # session['logged_in'] = True
+            # flash('You were logged in.')
+            # return redirect(url_for('home'))
+			error = 'Invalid Credentials. Please try again.'
     return render_template('login.html', error=error)
    
 @app.route('/logout')
