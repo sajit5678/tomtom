@@ -13,9 +13,6 @@ def home():
 def welcome():
     return render_template('welcome.html')  # render a template
 
-@app.route('/newpage1')
-def welcome():
-    return render_template('main.html')
 
 # # start the server with the 'run()' method
 if __name__ == '__main__':
