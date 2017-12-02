@@ -1,6 +1,6 @@
 # import the Flask class from the flask module
 from flask import Flask, render_template, redirect, url_for, request, session, flash
-from functools import wraps
+#from functools import wraps
 
 # create the application object
 app = Flask(__name__)
@@ -43,12 +43,12 @@ def welcome():
             # return redirect(url_for('home'))
     # return render_template('login.html', error=error)
 
-@app.route('/logout')
-@login_required
-def logout():
-    session.pop('logged_in', None)
-    flash('You were logged out.')
-    return redirect(url_for('welcome'))
+# @app.route('/logout')
+# @login_required
+# def logout():
+    # session.pop('logged_in', None)
+    # flash('You were logged out.')
+    # return redirect(url_for('welcome'))
 
 
 # start the server with the 'run()' method
