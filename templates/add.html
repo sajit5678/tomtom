@@ -2,7 +2,7 @@
 <html>
    <body><center>
    
-      <h3>Students - Flask SQLAlchemy example</h3>
+      <h3>Transfer Amount</h3>
       <hr/>
       
       {%- for category, message in get_flashed_messages(with_categories = true) %}
@@ -12,12 +12,19 @@
       {%- endfor %}
       
       <form action = "{{ request.path }}" method = "post">
-         <label for = "name">Transfer By</label><br>
-         <input type = "text" name = "name" placeholder = "Name" /><br>
+         <label for = "person">Transfer By</label><br>
+		 <input list="person" name="name" placeholder = "Person name">
+            <datalist id="name">
+              <option value="Shamila">
+              <option value="Sabib">
+              <option value="Sajit">
+             </datalist><br>
          <label for = "tra">Transfer Amount</label><br>
 		 <input type = "text" name = "tra" placeholder = "amount" /><br>
          <label for = "reason">Reason</label><br>
          <textarea name = "bal" placeholder = "reason"></textarea><br>
+		 <label for = "date">Date</label><br>
+         <input type = "date" name = "date" placeholder = "date" /><br>
          
          <input type = "submit" value = "Submit" />
       </form>

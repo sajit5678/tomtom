@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang = "en">
    <head>
-   <center><h2> Family Expenditure</h2></center>
+   <center><h2> Family Expenditure Detail</h2></center>
    </head>
    <body><center>
 	<table cellspacing = "10">
@@ -23,9 +23,10 @@
       <table border = "1" bgcolor = "gray" cellpadding = "5" cellspacing = "5">
          <thead>
             <tr>
-               <td>Name</td>
-               <td>Deducted Amount</td>
-               <td>Item</td>
+               <td>Date  </td>
+			   <td>Name  </td>
+               <td>Used_Amount</td>
+               <td>Reason/item</td>
                <td>Transfer</td>
 			   <td>Balance</td>
 			   
@@ -35,7 +36,8 @@
          <tbody>
             {% for student in students %}
                <tr>
-                  <td>{{ student.name }}</td>
+                  <td>{{ student.date }}</td>
+				  <td>{{ student.name }}</td>
                   <td>{{ student.city }}</td>
                   <td>{{ student.addr }}</td>
                   <td>{{ student.transfer }}</td>

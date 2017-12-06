@@ -11,13 +11,15 @@ db = SQLAlchemy(app)
 
 class deducted(db.Model):
 	id = db.Column('student_id', db.Integer, primary_key = True)
+	date = db.Column(db.String(100))
 	name = db.Column(db.String(100))
-	city = db.Column(db.String(50))
+	city = db.Column(db.String(100))
 	addr = db.Column(db.String(200))
 	transfer = db.Column(db.String(100))
 	bal = db.Column(db.String(100))
 
-	def __init__(self, name, city, addr, transfer, bal):
+	def __init__(self, date, name, city, addr, transfer, bal):
+		   self.date = date
 		   self.name = name
 		   self.city = city
 		   self.addr = addr
@@ -63,6 +65,8 @@ def add():
 		data = deducted.query.all()
 		b = request.form['name']
 		e = request.form['tra']
+		k = request.form['bal']
+		j = request.form['date']
 		if data:
 			for col in data:
 				h = col.bal
@@ -70,7 +74,7 @@ def add():
 		else:
 			g = e
 			#g = int(h) + int(e)
-		deduct = deducted(b, '', '', e, g)
+		deduct = deducted(j, b, '', k, e, g)
 
 		db.session.add(deduct)
 		db.session.commit()
@@ -93,8 +97,9 @@ def use():
 		b = request.form['name']
 		c = request.form['deduct']
 		d = request.form['item']
-		g = int(c) + int(h)
-		deduct = deducted(b, c, d, '', g)
+		j = request.form['date']
+		g = int(h)-int(c)
+		deduct = deducted(j, b, c, d, '', g)
 
 		db.session.add(deduct)
 		db.session.commit()
