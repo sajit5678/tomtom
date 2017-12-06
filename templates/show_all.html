@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang = "en">
+   <head>
+   <center><h2> Family Expenditure</h2></center>
+   </head>
+   <body><center>
+	<table cellspacing = "10">
+		<tr>
+				<form action = "{{ url_for('show_all') }}" >
+						<input type = "submit" value = "Show List" />
+				</form>
+				<form action = "{{ url_for('add') }}">
+						<input type = "submit" value = "Add/Transfer" />
+				</form>
+				<form action = "{{ url_for('use') }}">
+						<input type = "submit" value = "Deduct" />
+				</form>
+				<form action = "{{ url_for('logout') }}"><input type = "submit" value = "Logout" /></form>
+            </tr>
+			</table>
+      
+				         
+      <table border = "1" bgcolor = "gray" cellpadding = "5" cellspacing = "5">
+         <thead>
+            <tr>
+               <td>Name</td>
+               <td>Deducted Amount</td>
+               <td>Item</td>
+               <td>Transfer</td>
+			   <td>Balance</td>
+			   
+            </tr>
+         </thead>
+         
+         <tbody>
+            {% for student in students %}
+               <tr>
+                  <td>{{ student.name }}</td>
+                  <td>{{ student.city }}</td>
+                  <td>{{ student.addr }}</td>
+                  <td>{{ student.transfer }}</td>
+				  <td>{{ student.bal }}</td>
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table><br>
+	  <form action = "{{ url_for('logout') }}">Click <input type = "submit" value = "Here" /> to logout</form> 
+   </center>
+   </body>
+</html>

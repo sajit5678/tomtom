@@ -1,13 +1,14 @@
-{% extends "base.html" %}
+<center>{% extends "base.html" %}
 {% block content %}
-<h1>This website is design by Sajina for her computer course</h1>
-<h2>Contact me if you want to join in this project in my contact no. 883700..</h2>
+<head>
+   <center><h2> Family Expenditure</h2></center>
+   </head>
 <h3>Please login</h3>
-<br>
+<br><center>
 <form action="" method="post">
   <input type="text" placeholder="Username" name="username" value="{{request.form.username }}">
   <input type="password" placeholder="Password" name="password" value="{{request.form.password }}">
   <input class="btn btn-default" type="submit" value="Login">
-</form>
+</form></center>
 
-{% endblock %}
+{% endblock %}</center>

@@ -1,12 +1,28 @@
-# import the Flask class from the flask module
 from flask import Flask, render_template, redirect, url_for, request, session, flash
+#from flask import Flask, request, flash, url_for, redirect, render_template
+from flask_sqlalchemy import SQLAlchemy
 from functools import wraps
 
-# create the application object
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///deducted.sqlite3'
+app.config['SECRET_KEY'] = "random string"
 
-# config
-app.secret_key = 'my precious'
+db = SQLAlchemy(app)
+
+class deducted(db.Model):
+	id = db.Column('student_id', db.Integer, primary_key = True)
+	name = db.Column(db.String(100))
+	city = db.Column(db.String(50))
+	addr = db.Column(db.String(200))
+	transfer = db.Column(db.String(100))
+	bal = db.Column(db.String(100))
+
+	def __init__(self, name, city, addr, transfer, bal):
+		   self.name = name
+		   self.city = city
+		   self.addr = addr
+		   self.transfer = transfer
+		   self.bal = bal
 
 # login required decorator
 def login_required(f):
@@ -22,68 +38,77 @@ def login_required(f):
 # use decorators to link the function to a url
 @app.route('/')
 @login_required
-def home():
-    return render_template('index.html')  # render a template
-    # return "Hello, World!"  # return a string
-@app.route('/welcome')
-def welcome():
-    return render_template('welcome.html')  # render a template
-
-@app.route('/newpage1')
-def newpage1():
-    return render_template('main.html')
+def show_all():
+   return render_template('show_all.html', students = deducted.query.all() )
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
     error = None
     if request.method == 'POST':
-        if request.form['username'] != 'tombiton' or request.form['password'] != 'thothoiba':
+        if request.form['username'] != 'najfamily' or request.form['password'] != 'ourfamily':
             error = 'Invalid Credentials. Please try again.'
         else:
             session['logged_in'] = True
             flash('You were logged in. This is my new code')
-            return redirect(url_for('home'))
+            return redirect(url_for('show_all'))
     return render_template('login.html', error=error)
-   
+	
+@app.route('/add', methods = ['GET', 'POST'])
+@login_required
+def add():
+	if request.method == 'POST':
+	  if not request.form['name'] or not request.form['tra']:
+		 flash('Please enter all the fields', 'error')
+	  else:
+		data = deducted.query.all()
+		b = request.form['name']
+		e = request.form['tra']
+		if data:
+			for col in data:
+				h = col.bal
+				g = int(h) + int(e)
+		else:
+			g = e
+			#g = int(h) + int(e)
+		deduct = deducted(b, '', '', e, g)
+
+		db.session.add(deduct)
+		db.session.commit()
+		flash('Record was successfully added')
+		return redirect(url_for('show_all'))
+		
+	return render_template('add.html')
+
+@app.route('/use', methods = ['GET', 'POST'])
+@login_required
+def use():
+   if request.method == 'POST':
+      if not request.form['name'] or not request.form['deduct']:
+         flash('Please enter all the fields', 'error')
+      else:
+		data = deducted.query.all()
+		if data:
+			for col in data:
+				h = col.bal
+		b = request.form['name']
+		c = request.form['deduct']
+		d = request.form['item']
+		g = int(c) + int(h)
+		deduct = deducted(b, c, d, '', g)
+
+		db.session.add(deduct)
+		db.session.commit()
+		flash('Record was successfully added')
+		return redirect(url_for('show_all'))
+   return render_template('use.html')
+
 @app.route('/logout')
 @login_required
 def logout():
     session.pop('logged_in', None)
     flash('You were logged out.')
-    return redirect(url_for('welcome'))
-
-
-# # start the server with the 'run()' method
+    return redirect(url_for('login'))
+	
 if __name__ == '__main__':
-    app.run(debug=True)
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-# from flask import Flask, render_template
-
-# # create the application object
-# app = Flask(__name__)
-
-# # use decorators to link the function to a url
-# @app.route('/')
-# def home():
-    # return "Hello, World! This is the app develop and design for the \n education purpose only anyone who are interested can contact mamu on the given phone number ok!!!!!!!!!"  # return a string
-
-# @app.route('/welcome')
-# def welcome():
-    # return render_template('welcome.html')  # render a template
-
-
-# # # start the server with the 'run()' method
-# if __name__ == '__main__':
-    # app.run(debug=True)
+   db.create_all()
+   app.run(debug = True)
