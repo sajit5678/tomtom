@@ -1,7 +1,20 @@
 <!DOCTYPE html>
 <html>
    <body><center>
-   
+	<table cellspacing = "10">
+		<tr>
+				<form action = "{{ url_for('show_all') }}" >
+						<input type = "submit" value = "Show List" />
+				</form>
+				<form action = "{{ url_for('add') }}">
+						<input type = "submit" value = "Add/Transfer" />
+				</form>
+				<form action = "{{ url_for('use') }}">
+						<input type = "submit" value = "Deduct" />
+				</form>
+				<form action = "{{ url_for('logout') }}"><input type = "submit" value = "Logout" /></form>
+            </tr>
+			</table>
       <h3>Transfer Amount</h3>
       <hr/>
       
@@ -13,11 +26,10 @@
       
       <form action = "{{ request.path }}" method = "post">
          <label for = "person">Transfer By</label><br>
-		 <input list="person" name="name" placeholder = "Person name">
+		 <input list="person" name="name" placeholder = "Person name"><br>
             <datalist id="name">
-              <option value="Shamila">
-              <option value="Sabib">
-              <option value="Sajit">
+              <option value="Tomba">Tomba</option>
+              <option value="Tombi">Tombi</option>
              </datalist><br>
          <label for = "tra">Transfer Amount</label><br>
 		 <input type = "text" name = "tra" placeholder = "amount" /><br>

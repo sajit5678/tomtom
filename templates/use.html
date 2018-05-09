@@ -1,7 +1,20 @@
 <!DOCTYPE html>
 <html>
    <body><center>
-   
+	<table cellspacing = "10">
+		<tr>
+				<form action = "{{ url_for('show_all') }}" >
+						<input type = "submit" value = "Show List" />
+				</form>
+				<form action = "{{ url_for('add') }}">
+						<input type = "submit" value = "Add/Transfer" />
+				</form>
+				<form action = "{{ url_for('use') }}">
+						<input type = "submit" value = "Deduct" />
+				</form>
+				<form action = "{{ url_for('logout') }}"><input type = "submit" value = "Logout" /></form>
+            </tr>
+			</table>
       <h3>Used up expenditure</h3>
       <hr/>
       
